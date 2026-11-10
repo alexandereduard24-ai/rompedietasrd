@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMPEDIETAS RD | Menú Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Encabezado Elegante */
+        header {
+            text-align: center;
+            padding: 35px 20px;
+            background: linear-gradient(145deg, #1f140e, #110905);
+            border: 1px solid #332115;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .brand-name {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            color: #b3b3b3;
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 18px;
+        }
+
+        .instagram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .instagram-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Títulos de Categoría */
+        .category-header {
+            color: #ff9100;
+            font-size: 1.25rem;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a1f18;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Grid de Productos */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .menu-card {
+            background: #141414;
+            border: 1px solid #262626;
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .menu-card:hover {
+            border-color: #ff7b00;
+            transform: translateY(-3px);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-price {
+            color: #ffae00;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
+
+        .card-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1f1f1f;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .btn-qty {
+            background: #ff7b00;
+            color: #000;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .btn-qty.minus {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-qty:hover {
+            opacity: 0.9;
+        }
+
+        .qty-num {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Carrito Flotante */
+        .cart-panel {
+            position: sticky;
+            bottom: 20px;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #ff7b00;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            display: none;
+        }
+
+        .cart-panel.active {
+            display: block;
+        }
+
+        .cart-panel h3 {
+            color: #ffae00;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .cart-items {
+            list-style: none;
+            max-height: 160px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .cart-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #262626;
+            font-size: 0.9rem;
+            color: #d1d1d1;
+        }
+
+        .cart-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cart-summary span {
+            color: #ffae00;
+        }
+
+        .btn-ws {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-ws:hover {
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #555;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="brand-name">ROMPEDIETAS RD</div>
+            <p class="tagline">Sabor auténtico para romper la dieta como se debe</p>
+            <a href="https://www.instagram.com/rompedietasrd1" class="instagram-btn" target="_blank">
+                📷 @rompedietasrd1
+            </a>
+        </header>
+
+        <!-- SECCIONES DE PLATOS -->
+        <div id="menuContent"></div>
+
+        <!-- PANEL DE CARRITO -->
+        <div class="cart-panel" id="cartPanel">
+            <h3>🛍️ Tu Pedido</h3>
+            <ul class="cart-items" id="cartItems"></ul>
+            <div class="cart-summary">
+                Total: <span id="cartTotal">RD$ 0.00</span>
+            </div>
+            <a href="#" id="wsBtn" class="btn-ws" target="_blank">
+                📲 Enviar Pedido por WhatsApp
+            </a>
+        </div>
+
+        <footer>
+            © 2026 ROMPEDIETAS RD — Todos los derechos reservados.
+        </footer>
+    </div>
+
+    <script>
+        const menuData = [
+            {
+                categoria: "Hamburguesas & Sandwiches",
+                items: [
+                    { id: 1, nombre: "Club Sandwich", desc: "Clásico sándwich multicapa con pollo, jamón, queso y vegetales frescos.", precio: 300 },
+                    { id: 2, nombre: "Bacon Chesse", desc: "Jugosa hamburguesa con abundante queso fundido y crujientes tiras de tocino.", precio: 300 }
+                ]
+            },
+            {
+                categoria: "Carnes",
+                items: [
+                    { id: 3, nombre: "Chicharrón por libra", desc: "Crujiente por fuera y tierno por dentro, preparado al estilo tradicional.", precio: 500 },
+                    { id: 4, nombre: "Alitas (Servicio)", desc: "Deliciosas alitas doradas y jugosas con el toque de la casa.", precio: 350 },
+                    { id: 5, nombre: "Costilla a la BBQ", desc: "Costillas de cerdo ahumadas y bañadas en nuestra salsa barbacoa especial.", precio: 450 },
+                    { id: 6, nombre: "Pechuga a la Parrilla", desc: "Tierna pechuga de pollo marinada y asada a la perfección.", precio: 300 },
+                    { id: 7, nombre: "Parrillada", desc: "Mix ideal de carnes selectas para compartir y disfrutar al máximo.", precio: 850 }
+                ]
+            },
+            {
+                categoria: "Camarones",
+                items: [
+                    { id: 8, nombre: "Camarones al Ajillo", desc: "Camarones frescos salteados en aceite de oliva, ajo y mantequilla.", precio: 450 },
+                    { id: 9, nombre: "Camarones en Salsa Blanca", desc: "Bañados en una suave, cremosa y deliciosa salsa blanca de la casa.", precio: 500 }
+                ]
+            },
+            {
+                categoria: "Mofongo",
+                items: [
+                    { id: 10, nombre: "Mofongo de Chicharrón", desc: "Majado tradicional de plátano verde con crujientes trozos de chicharrón.", precio: 450 },
+                    { id: 11, nombre: "Mofongo de Camarones (Camarofongo)", desc: "Majado de plátano relleno de camarones jugosos en salsa especial.", precio: 650 },
+                    { id: 12, nombre: "Mofongo de Costilla", desc: "Exquisito mofongo acompañado de tiernas costillas de cerdo.", precio: 600 }
+                ]
+            },
+            {
+                categoria: "Guarniciones",
+                items: [
+                    { id: 13, nombre: "Tostones", desc: "Crujientes rodajas de plátano verde frito.", precio: 0 },
+                    { id: 14, nombre: "Papas Fritas", desc: "Bastones de papa dorados y crujientes.", precio: 0 },
+                    { id: 15, nombre: "Yuca", desc: "Yuca suave y tierna al diente.", precio: 0 },
+                    { id: 16, nombre: "Guineos Hervidos", desc: "Guineitos verdes cocidos en su punto exacto.", precio: 0 }
+                ]
+            },
+            {
+                categoria: "Bebidas",
+                items: [
+                    { id: 17, nombre: "Heineken", desc: "Cerveza holandiza premium bien fría.", precio: 200 },
+                    { id: 18, nombre: "Presidente", desc: "La cerveza nacional, fría y refrescante.", precio: 200 },
+                    { id: 19, nombre: "Jugos Naturales", desc: "Refrescantes jugos de frutas naturales de temporada.", precio: 50 }
+                ]
+            }
+        ];
+
+        const WHATSAPP_NUM = "18495698123";
+        let cart = {};
+
+        const content = document.getElementById('menuContent');
+
+        menuData.forEach(cat => {
+            const catHeader = document.createElement('h3');
+            catHeader.className = 'category-header';
+            catHeader.textContent = cat.categoria;
+            content.appendChild(catHeader);
+
+            const grid = document.createElement('div');
+            grid.className = 'menu-grid';
+
+            cat.items.forEach(item => {
+                const pText = item.precio > 0 ? `RD$ ${item.precio}` : 'Guarnición (Incluida)';
+                grid.innerHTML += `
+                    <div class="menu-card">
+                        <div>
+                            <div class="card-title">${item.nombre}</div>
+                            <div class="card-desc">${item.desc}</div>
+                            <div class="card-price">${pText}</div>
+                        </div>
+                        <div class="card-controls">
+                            <button class="btn-qty minus" onclick="updateQty(${item.id}, '${item.nombre}', ${item.precio}, -1)">-</button>
+                            <span class="qty-num" id="qty-${item.id}">0</span>
+                            <button class="btn-qty" onclick="updateQty(${item.id}, '${item.nombre}', ${item.precio}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.appendChild(grid);
+        });
+
+        function updateQty(id, nombre, precio, change) {
+            if (!cart[id]) {
+                cart[id] = { nombre, precio, qty: 0 };
+            }
+
+            cart[id].qty += change;
+
+            if (cart[id].qty <= 0) {
+                delete cart[id];
+                document.getElementById(`qty-${id}`).textContent = 0;
+            } else {
+                document.getElementById(`qty-${id}`).textContent = cart[id].qty;
+            }
+
+            renderCart();
+        }
+
+        function renderCart() {
+            const panel = document.getElementById('cartPanel');
+            const list = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            const wsBtn = document.getElementById('wsBtn');
+
+            list.innerHTML = '';
+            let total = 0;
+            let itemsCount = 0;
+            let msg = "¡Hola ROMPEDIETAS RD! Deseo ordenar:\n\n";
+
+            for (let id in cart) {
+                const prod = cart[id];
+                const sub = prod.precio * prod.qty;
+                total += sub;
+                itemsCount += prod.qty;
+
+                const subText = prod.precio > 0 ? `RD$ ${sub}` : 'Guarnición';
+                list.innerHTML += `<li><span>${prod.qty}x ${prod.nombre}</span> <span>${subText}</span></li>`;
+                msg += `• ${prod.qty}x ${prod.nombre} (${subText})\n`;
+            }
+
+            totalEl.textContent = `RD$ ${total}.00`;
+            msg += `\n*Total estimado: RD$ ${total}.00*`;
+
+            if (itemsCount > 0) {
+                panel.classList.add('active');
+                wsBtn.href = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+            } else {
+                panel.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
