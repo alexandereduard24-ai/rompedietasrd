@@ -12,8 +12,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* Fondo completo para la página */
         body {
-            background-color: #0d0d0d;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.88)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop') fixed center center;
+            background-size: cover;
             color: #f5f5f5;
             min-height: 100vh;
             padding: 20px 10px;
@@ -24,20 +27,22 @@
             margin: 0 auto;
         }
 
-        /* Encabezado Elegante */
+        /* Encabezado con su propia imagen de fondo sutil y desenfoque */
         header {
             text-align: center;
-            padding: 35px 20px;
-            background: linear-gradient(145deg, #1f140e, #110905);
-            border: 1px solid #332115;
+            padding: 45px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            border: 1px solid rgba(255, 123, 0, 0.35);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
             margin-bottom: 30px;
-            position: relative;
+            backdrop-filter: blur(5px);
         }
 
         .brand-name {
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: 2px;
             background: linear-gradient(90deg, #ff7b00, #ffae00);
@@ -45,13 +50,15 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
             text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .tagline {
-            color: #b3b3b3;
+            color: #e0e0e0;
             font-size: 0.95rem;
             font-weight: 300;
             margin-bottom: 18px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
         .instagram-btn {
@@ -65,7 +72,7 @@
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.35);
             transition: transform 0.2s;
         }
 
@@ -79,10 +86,11 @@
             font-size: 1.25rem;
             margin: 30px 0 15px 0;
             padding-bottom: 8px;
-            border-bottom: 1px solid #2a1f18;
+            border-bottom: 2px solid #ff7b00;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         /* Grid de Productos */
@@ -92,9 +100,11 @@
             gap: 16px;
         }
 
+        /* Tarjetas semitransparentes */
         .menu-card {
-            background: #141414;
-            border: 1px solid #262626;
+            background: rgba(18, 18, 18, 0.84);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 14px;
             padding: 18px;
             display: flex;
@@ -106,6 +116,7 @@
         .menu-card:hover {
             border-color: #ff7b00;
             transform: translateY(-3px);
+            background: rgba(24, 24, 24, 0.92);
         }
 
         .card-title {
@@ -117,7 +128,7 @@
 
         .card-desc {
             font-size: 0.85rem;
-            color: #999;
+            color: #bbb;
             margin-bottom: 12px;
             line-height: 1.3;
         }
@@ -133,7 +144,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #1f1f1f;
+            background: rgba(0, 0, 0, 0.6);
             padding: 6px 12px;
             border-radius: 8px;
         }
@@ -155,7 +166,7 @@
         }
 
         .btn-qty.minus {
-            background: #333;
+            background: #444;
             color: #fff;
         }
 
@@ -168,18 +179,19 @@
             font-size: 1rem;
         }
 
-        /* Carrito Flotante */
+        /* Panel Carrito Flotante */
         .cart-panel {
             position: sticky;
             bottom: 20px;
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(14px);
             border: 1px solid #ff7b00;
             border-radius: 16px;
             padding: 20px;
             margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
             display: none;
+            z-index: 100;
         }
 
         .cart-panel.active {
@@ -203,7 +215,7 @@
             display: flex;
             justify-content: space-between;
             padding: 6px 0;
-            border-bottom: 1px solid #262626;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             color: #d1d1d1;
         }
@@ -233,7 +245,7 @@
             border-radius: 30px;
             font-weight: 700;
             font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             transition: transform 0.2s;
         }
 
@@ -245,14 +257,15 @@
             text-align: center;
             margin-top: 50px;
             padding: 20px;
-            color: #555;
+            color: #aaa;
             font-size: 0.85rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
+        <!-- HEADER CON IMAGEN DE FONDO SUTIL -->
         <header>
             <div class="brand-name">ROMPEDIETAS RD</div>
             <p class="tagline">Sabor auténtico para romper la dieta como se debe</p>
@@ -318,8 +331,8 @@
             {
                 categoria: "Guarniciones",
                 items: [
-                    { id: 13, nombre: "Tostones", desc: "Crujientes rodajas de plátano verde frito.", precio: 0 },
-                    { id: 14, nombre: "Papas Fritas", desc: "Bastones de papa dorados y crujientes.", precio: 0 },
+                    { id: 13, nombre: "Papas Fritas", desc: "Bastones de papa dorados y crujientes al estilo de la casa.", precio: 0 },
+                    { id: 14, nombre: "Tostones", desc: "Crujientes rodajas de plátano verde frito.", precio: 0 },
                     { id: 15, nombre: "Yuca", desc: "Yuca suave y tierna al diente.", precio: 0 },
                     { id: 16, nombre: "Guineos Hervidos", desc: "Guineitos verdes cocidos en su punto exacto.", precio: 0 }
                 ]
@@ -327,7 +340,7 @@
             {
                 categoria: "Bebidas",
                 items: [
-                    { id: 17, nombre: "Heineken", desc: "Cerveza holandiza premium bien fría.", precio: 200 },
+                    { id: 17, nombre: "Heineken", desc: "Cerveza holandesa premium bien fría.", precio: 200 },
                     { id: 18, nombre: "Presidente", desc: "La cerveza nacional, fría y refrescante.", precio: 200 },
                     { id: 19, nombre: "Jugos Naturales", desc: "Refrescantes jugos de frutas naturales de temporada.", precio: 50 }
                 ]
